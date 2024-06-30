@@ -162,6 +162,10 @@
             font-weight: bold;
             color: #333;
         }
+        .link-productos {
+            text-align: center;
+            margin-bottom: 30px;
+        }
     </style>
 </head>
 <body>
@@ -203,6 +207,10 @@
                             <i class="fas fa-shopping-cart" style="color: #ffcc00;"></i> <!-- Icono del carrito en color amarillo -->
                             <span id="cart-count">0</span>
                         </a>
+                    </div>
+                     <!-- Ver Productos -->
+                     <div class="link-productos">
+                        <a href="{{ route('productos.index') }}">Ver Productos</a>
                     </div>
 
                     <!-- Cart Content -->
