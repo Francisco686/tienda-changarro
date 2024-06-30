@@ -353,6 +353,62 @@
 .btn-comprar {
     margin-top: 10px; /* Espacio entre el texto y el botón */
 }
+.contact-form-container {
+    width: 100%;
+    max-width: 995px; /* Ajuste el máximo ancho según sea necesario */
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form {
+    width: 100%;
+}
+
+.contact-form h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.contact-form .form-group {
+    margin-bottom: 15px;
+}
+
+.contact-form label {
+    font-weight: bold;
+    color: #555;
+}
+
+.contact-form .form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.contact-form textarea.form-control {
+    resize: vertical;
+}
+
+.contact-form button[type="submit"] {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.contact-form button[type="submit"]:hover {
+    background-color: #0056b3;
+}
 
 
 
@@ -372,7 +428,7 @@
         <div class="sidebar">
             <div class="sidebar-logo">
                 <a href="../index.html" class="logo">
-                    <img src="../assets/img/changarro.jpg" alt="El Changarro Logo" height="50">
+<img src="../assets/img/changarro.jpg" alt="El Changarro Logo" style="border: 2px solid #ccc; border-radius: 5px; padding: 5px; height: 80px;">
                 </a>
             </div>
             <div class="sidebar-wrapper scrollbar scrollbar-inner">
@@ -521,28 +577,27 @@
                         </div>
                     </div>
 
-                    <!-- Contact Form -->
-                    <h2>Contacto</h2>
-                    <form action="{{ url('/contact') }}" method="post">
-                        @csrf
-                        <div class="form-group">
-                            <label for="name">Nombre:</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Correo Electrónico:</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Mensaje:</label>
-                            <textarea class="form-control" id="message" name="message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Enviar</button>
-                    </form>
-                </div>
-            </main>
+                  <!-- Contact Form -->
+<div class="contact-form-container">
+    <h2>Contacto</h2>
+    <form action="{{ url('/contact') }}" method="post" class="contact-form">
+        @csrf
+        <div class="form-group">
+            <label for="name">Nombre:</label>
+            <input type="text" class="form-control" id="name" name="name" required>
         </div>
-    </div>
+        <div class="form-group">
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="message">Mensaje:</label>
+            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+</div>
+
 
     <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
@@ -598,8 +653,8 @@ $('.add-to-cart').on('click', function(e) {
             <img src="${productImage}" class="cart-item-image" alt="${productName}">
             <p class="cart-item-title">${productName}</p>
           <div class="cart-item">
-    <p class="cart-item-description">Chocolate</p>
-    <p class="cart-item-details">Precio: $18</p>
+    <p class="cart-item-description"></p>
+    <p class="cart-item-details">Precio:</p>
 </div>
 
             <div class="cart-item-quantity">
