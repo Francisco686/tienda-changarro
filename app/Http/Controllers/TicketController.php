@@ -3,88 +3,88 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ticket;
-use Illuminate\Http\RedirectResponse;
+use App\Models\Venta; // Modelo de Venta según tu aplicación
+use App\Models\Fecha;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\View\View;
 
 class TicketController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(): View
+    public function index() 
     {
-        $tickets = Ticket::latest()->paginate(5);
-
-        return view('tickets.index', compact('tickets'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        $tickets = Ticket::with(['venta.producto', 'fecha'])->get();
+        return view('tickets.index', compact('tickets'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create(): View
+
+
+    public function create()
     {
-        return view('tickets.create');
+        $ventas = Venta::all();
+        $fechas = Fecha::all();
+        return view('tickets.create', compact('ventas', 'fechas'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
+{
+    $request->validate([
+        'id_venta' => 'required|exists:ventas,id',
+        'id_fecha' => 'required|exists:fechas,id_fecha',
+    ]);
+
+    // Obtener la venta seleccionada y su total
+    $venta = Venta::findOrFail($request->id_venta);
+    $total_venta = $venta->total;
+
+    // Crear el nuevo ticket con los datos recibidos
+    $ticket = new Ticket();
+    $ticket->id_venta = $request->id_venta;
+    $ticket->id_fecha = $request->id_fecha;
+    $ticket->total = $total_venta; // Aquí se guarda el total de la venta en el ticket
+
+    $ticket->save();
+
+    return redirect()->route('tickets.index')->with('success', 'Ticket creado con éxito.');
+}
+
+    public function show($id)
     {
-        $request->validate([
-            'name' => 'required',
-            'detail' => 'required',
-        ]);
-
-        Ticket::create($request->all());
-
-        return redirect()->route('tickets.index')
-            ->with('success', 'Ticket created successfully.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Ticket $ticket): View
-    {
+        $ticket = Ticket::with(['venta.producto'])->findOrFail($id); // Cargar la relación con Producto
         return view('tickets.show', compact('ticket'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Ticket $ticket): View
+    public function edit($id)
     {
-        return view('tickets.edit', compact('ticket'));
+        $ticket = Ticket::findOrFail($id);
+        $ventas = Venta::all();
+        $fechas = Fecha::all();
+        return view('tickets.edit', compact('ticket', 'ventas', 'fechas'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Ticket $ticket): RedirectResponse
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
-            'detail' => 'required',
+            'id_venta' => 'required|exists:ventas,id',
+            'id_fecha' => 'required|exists:fechas,id_fecha',
         ]);
 
+        // Obtener el total de la venta desde la tabla Venta
+        $venta = Venta::findOrFail($request->id_venta);
+        $total_venta = $venta->total;
+
+        // Agregar el total de la venta al request
+        $request->merge(['total_venta' => $total_venta]);
+
+        $ticket = Ticket::findOrFail($id);
         $ticket->update($request->all());
 
-        return redirect()->route('tickets.index')
-            ->with('success', 'Ticket updated successfully.');
+        return redirect()->route('tickets.index')->with('success', 'Ticket actualizado con éxito.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Ticket $ticket): RedirectResponse
+    public function destroy($id)
     {
+        $ticket = Ticket::findOrFail($id);
         $ticket->delete();
 
-        return redirect()->route('tickets.index')
-            ->with('success', 'Ticket deleted successfully.');
+        return redirect()->route('tickets.index')->with('success', 'Ticket eliminado con éxito.');
     }
 }

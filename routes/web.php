@@ -36,3 +36,5 @@ Route::get('/dashboard', function () {
 })->name('dashboard');
 
 Route::resource('tickets', TicketController::class);
+Route::get('tickets/{ticket}', 'TicketController@show')->name('tickets.show');
+Route::get('/tickets/{ticket}', 'TicketController@show')->name('tickets.show');

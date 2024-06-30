@@ -1,49 +1,38 @@
-@extends('tickets.layout')
+@extends('layouts.app') <!-- Asegúrate de extender el layout principal si lo tienes -->
 
 @section('content')
-
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>tickets </h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('tickets.create') }}"> Create New Ticket</a>
-            </div>
-        </div>
-    </div>
-
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
-    @endif
-
-    <table class="table table-bordered">
-        <tr>
-            <th>No</th>
-            <th>Name</th>
-            <th>Details</th>
-            <th width="280px">Action</th>
-        </tr>
-        @foreach ($tickets as $ticket) <!-- Cambio de $products a $tickets -->
-        <tr>
-            <td>{{ ++$i }}</td>
-            <td>{{ $ticket->name }}</td>
-            <td>{{ $ticket->detail }}</td>
-            <td>
-                <form action="{{ route('tickets.destroy',$ticket->id) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('tickets.show',$ticket->id) }}">Show</a>
-                    <a class="btn btn-primary" href="{{ route('tickets.edit',$ticket->id) }}">Edit</a>
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-            </td>
-        </tr>
-        @endforeach
+<div class="container">
+    <h1>Listado de Tickets</h1>
+    <a href="{{ route('tickets.create') }}" class="btn btn-success mb-3">Crear Nuevo Ticket</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID Ticket</th>
+                <th>Nombre del Producto</th>
+                <th>Fecha</th>
+                <th>Total de la Venta</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($tickets as $ticket)
+            <tr>
+                <td>{{ $ticket->id }}</td>
+                <td>{{ $ticket->venta->producto->nombre }}</td> <!-- Aquí se muestra el nombre del producto -->
+                <td>{{ $ticket->fecha->fecha }}</td> <!-- Aquí se muestra la fecha correctamente -->
+                <td>{{ $ticket->venta->total }}</td> <!-- Aquí se muestra el total de la venta -->
+                <td>
+                    <a href="{{ route('tickets.show', $ticket->id) }}" class="btn btn-primary">Ver</a>
+                    <a href="{{ route('tickets.edit', $ticket->id) }}" class="btn btn-warning">Editar</a>
+                    <form action="{{ route('tickets.destroy', $ticket->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
     </table>
-
-    {!! $tickets->links() !!}
-
+</div>
 @endsection

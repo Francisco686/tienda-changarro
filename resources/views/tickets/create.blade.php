@@ -1,95 +1,27 @@
-@extends('tickets.layout')
-
-  
+@extends('layouts.app')
 
 @section('content')
-
-<div class="row">
-
-    <div class="col-lg-12 margin-tb">
-
-        <div class="pull-left">
-
-            <h2>Add New Tickect</h2>
-
+<div class="container">
+    <h1>Crear Nuevo Ticket</h1>
+    <form action="{{ route('tickets.store') }}" method="POST">
+        @csrf
+        <div class="form-group">
+            <label for="id_venta">Venta</label>
+            <select name="id_venta" id="id_venta" class="form-control">
+                @foreach($ventas as $venta)
+                    <option value="{{ $venta->id }}">{{ $venta->producto->nombre }} - Total: {{ $venta->total }}</option>
+                @endforeach
+            </select>
         </div>
-
-        <div class="pull-right">
-
-            <a class="btn btn-primary" href="{{ route('tickets.index') }}"> Back</a>
-
+        <div class="form-group">
+            <label for="id_fecha">Fecha</label>
+            <select name="id_fecha" id="id_fecha" class="form-control">
+                @foreach($fechas as $fecha)
+                    <option value="{{ $fecha->id_fecha }}">{{ $fecha->fecha }}</option>
+                @endforeach
+            </select>
         </div>
-
-    </div>
-
+        <button type="submit" class="btn btn-success">Guardar</button>
+    </form>
 </div>
-
-   
-
-@if ($errors->any())
-
-    <div class="alert alert-danger">
-
-        <strong>Whoops!</strong> There were some problems with your input.<br><br>
-
-        <ul>
-
-            @foreach ($errors->all() as $error)
-
-                <li>{{ $error }}</li>
-
-            @endforeach
-
-        </ul>
-
-    </div>
-
-@endif
-
-   
-
-<form action="{{ route('tickets.store') }}" method="POST">
-
-    @csrf
-
-  
-
-     <div class="row">
-
-        <div class="col-xs-12 col-sm-12 col-md-12">
-
-            <div class="form-group">
-
-                <strong>Name:</strong>
-
-                <input type="text" name="name" class="form-control" placeholder="Name">
-
-            </div>
-
-        </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-12">
-
-            <div class="form-group">
-
-                <strong>Detail:</strong>
-
-                <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail"></textarea>
-
-            </div>
-
-        </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-
-                <button type="submit" class="btn btn-primary">Submit</button>
-
-        </div>
-
-    </div>
-
-   
-
-</form>
-
 @endsection
