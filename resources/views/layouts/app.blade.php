@@ -43,8 +43,6 @@
                         <li class="nav-item"><a class="nav-link" href="{{ route('tickets.create') }}">Tickets</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('telefonos.create') }}">Telefonos</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('venta_mayoreo.create') }}">Ventas Mayoreo</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('fechas.create') }}">Fechas</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('personas.create') }}">Personas</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

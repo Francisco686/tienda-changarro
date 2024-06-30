@@ -39,7 +39,7 @@
             background-color: #f0f0f0;
         }
         .sidebar {
-            background-color: #37474f;
+            background-color: #007bff; /* Fondo azul para la barra lateral */
             color: #fff;
         }
         .sidebar-logo {
@@ -52,17 +52,44 @@
             font-weight: bold;
             font-size: 1.5rem;
         }
+        .sidebar-logo img {
+            height: 90px; /* Hacer el logo más grande */
+        }
         .sidebar-content {
             padding: 20px;
         }
-        .nav-secondary .nav-link {
-            color: #ccc;
-        }
-        .nav-secondary .nav-link:hover {
-            color: #fff;
-        }
+        /* Ajustes para los enlaces de la barra lateral */
+.nav-secondary .nav-link {
+    color: #ccc;
+    transition: color 0.3s, transform 0.3s;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center; /* Para centrar verticalmente el texto y el icono */
+}
+
+/* Ajustes para los iconos de la barra lateral */
+.nav-secondary .nav-link i {
+    color: #ffcc00; /* Color amarillo para los iconos */
+    font-size: 2.5rem; /* Tamaño de los iconos */
+    margin-right: 10px; /* Espacio entre el icono y el texto */
+    transition: color 0.3s, transform 0.3s;
+}
+
+/* Efecto hover para los enlaces y los iconos */
+.nav-secondary .nav-link:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.nav-secondary .nav-link:hover i {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+       
+        
         .jumbotron {
-            background-color: #007bff;
+            background-color: #007bff; /* Fondo azul para el jumbotron */
             color: #fff;
             padding: 100px 20px;
             text-align: center;
@@ -126,6 +153,10 @@
             text-decoration: none;
             font-size: 1.8rem;
         }
+        .cart .btn-primary {
+            font-size: 1rem; /* Hacer el botón de registro más pequeño */
+            padding: 5px 10px;
+        }
         .cart-content {
             position: fixed;
             top: 0;
@@ -166,6 +197,71 @@
             text-align: center;
             margin-bottom: 30px;
         }
+        .cart-item-image {
+            max-width: 80px; /* Ajusta el tamaño máximo de la imagen */
+            height: auto; /* Mantiene la proporción de la imagen */
+        }
+        .highlight {
+            background-color: yellow;
+            padding: 0.2em;
+            border-radius: 3px;
+        }
+        /* Estilos más llamativos para los enlaces de la barra lateral */
+.nav-secondary .nav-link {
+    color: #ccc; /* Color de texto inicial */
+    transition: color 0.3s, transform 0.3s;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center; /* Para centrar verticalmente el texto y el icono */
+}
+
+/* Establecer colores vibrantes para cada enlace */
+.nav-secondary .nav-link[href="{{ route('home.index') }}"] {
+    color: #ff5733; /* Naranja */
+}
+
+.nav-secondary .nav-link[href="{{ route('productos.index') }}"] {
+    color: #33a1ff; /* Azul */
+}
+
+.nav-secondary .nav-link[href="{{ route('ventas.index') }}"] {
+    color: #ffa233; /* Naranja claro */
+}
+
+.nav-secondary .nav-link[href="{{ route('provedors.index') }}"] {
+    color: #33ff57; /* Verde */
+}
+
+.nav-secondary .nav-link[href="{{ route('empleados.index') }}"] {
+    color: #b333ff; /* Morado */
+}
+
+.nav-secondary .nav-link[href="{{ route('entradas.create') }}"] {
+    color: #ff33e6; /* Rosa */
+}
+
+.nav-secondary .nav-link[href="{{ route('tickets.create') }}"] {
+    color: #ff5733; /* Naranja */
+}
+
+.nav-secondary .nav-link[href="{{ route('telefonos.create') }}"] {
+    color: #33a1ff; /* Azul */
+}
+
+.nav-secondary .nav-link[href="{{ route('venta_mayoreo.create') }}"] {
+    color: #ffa233; /* Naranja claro */
+}
+
+/* Efecto hover para los enlaces */
+.nav-secondary .nav-link:hover {
+    color: #fff; /* Color al hacer hover */
+    transform: scale(1.1);
+}
+
+.nav-secondary .nav-link:
+
+    </style>
+
     </style>
 </head>
 <body>
@@ -179,19 +275,17 @@
             </div>
             <div class="sidebar-wrapper scrollbar scrollbar-inner">
                 <div class="sidebar-content">
-                    <ul class="nav nav-secondary">
-                        <li class="nav-item"><a class="nav-link" href="{{ route('home.index') }}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('productos.index') }}">Productos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('ventas.index') }}">Ventas</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('provedors.index') }}">Proveedores</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('empleados.index') }}">Empleados</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('entradas.create') }}">Entradas</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('tickets.create') }}">Tickets</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('telefonos.create') }}">Teléfonos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('venta_mayoreo.create') }}">Ventas Mayoreo</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('personas.create') }}">Personas</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('fechas.create') }}">Fechas</a></li>
-                    </ul>
+                <ul class="nav nav-secondary">
+        <li class="nav-item"><a class="nav-link" href="{{ route('home.index') }}"><i class="fas fa-home"></i> Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('productos.index') }}"><i class="fas fa-box"></i> Productos</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('ventas.index') }}"><i class="fas fa-shopping-cart"></i> Ventas</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('provedors.index') }}"><i class="fas fa-truck"></i> Proveedores</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('empleados.index') }}"><i class="fas fa-users"></i> Empleados</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('entradas.create') }}"><i class="fas fa-sign-in-alt"></i> Entradas</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('tickets.create') }}"><i class="fas fa-ticket-alt"></i> Tickets</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('telefonos.create') }}"><i class="fas fa-phone"></i> Teléfonos</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('venta_mayoreo.create') }}"><i class="fas fa-tags"></i> Ventas al por Mayor</a></li>
+    </ul>
                 </div>
             </div>
         </div>
@@ -208,11 +302,8 @@
                             <span id="cart-count">0</span>
                         </a>
                     </div>
-                     <!-- Ver Productos -->
-                     <div class="link-productos">
-                        <a href="{{ route('productos.index') }}">Ver Productos</a>
-                    </div>
-
+                     
+                    
                     <!-- Cart Content -->
                     <div class="cart-content" id="cart-content">
                         <div class="cart-close" id="cart-close">
@@ -229,28 +320,37 @@
                         <hr class="my-4">
                         <p>Somos expertos en ofrecerte productos abarroteros de la más alta calidad.</p>
                     </div>
-
-                    <!-- About, Services, Testimonials -->
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <h2>Sobre Nosotros</h2>
-                            <p>Somos una empresa apasionada por brindar la mejor atención y calidad en nuestros productos.</p>
-                        </div>
-                        <div class="col-lg-4">
-                            <h2>Servicios</h2>
-                            <ul>
-                                <li>Productos frescos y de calidad.</li>
-                                <li>Atención al cliente excepcional.</li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-4">
-                            <h2>Testimonios</h2>
-                            <blockquote>
-                                <p>"Siempre me sorprende la dedicación y variedad de productos que ofrecen."</p>
-                                <cite>Cliente Satisfecho</cite>
-                            </blockquote>
-                        </div>
+                    <!-- Carrusel de productos -->
+    <div id="carouselExampleIndicators" class="carousel slide mt-5" data-ride="carousel">
+        <ol class="carousel-indicators">
+            @foreach($productos as $key => $producto)
+                <li data-target="#carouselExampleIndicators" data-slide-to="{{ $key }}" class="{{ $key == 0 ? 'active' : '' }}"></li>
+            @endforeach
+        </ol>
+        <div class="carousel-inner">
+            @foreach($productos as $key => $producto)
+                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                    <img class="d-block w-100" src="{{ asset('storage/' . str_replace('public/', '', $producto->imagen)) }}" alt="{{ $producto->nombre }}">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>{{ $producto->nombre }}</h5>
+                        <p>{{ $producto->descripcion }}</p>
                     </div>
+                </div>
+            @endforeach
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+                   
+
+                   
 
                     <!-- Products -->
                     <h2>Productos</h2>
@@ -274,6 +374,27 @@
                         @empty
                             <p>No hay productos disponibles.</p>
                         @endforelse
+                    </div>
+                     <!-- About, Services, Testimonials -->
+                     <div class="row">
+                        <div class="col-lg-4">
+                            <h2>Sobre Nosotros</h2>
+                            <p>Somos una empresa apasionada por brindar la mejor atención y calidad en nuestros productos.</p>
+                        </div>
+                        <div class="col-lg-4">
+                            <h2>Servicios</h2>
+                            <ul>
+                                <li>Productos frescos y de calidad.</li>
+                                <li>Atención al cliente excepcional.</li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-4">
+                            <h2>Testimonios</h2>
+                            <blockquote>
+                                <p>"Siempre me sorprende la dedicación y variedad de productos que ofrecen."</p>
+                                <cite>Cliente Satisfecho</cite>
+                            </blockquote>
+                        </div>
                     </div>
 
                     <!-- Contact Form -->
@@ -300,6 +421,11 @@
     </div>
 
     <!-- JavaScript -->
+    <script src="../assets/js/core/jquery.3.2.1.min.js"></script>
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+    <script src="../assets/js/kaiadmin.min.js"></script>
+    <script src="../assets/js/demo.js"></script>
     <script src="../assets/js/core/jquery-3.7.1.min.js"></script>
     <script src="../assets/js/core/popper.min.js"></script>
     <script src="../assets/js/core/bootstrap.min.js"></script>
@@ -324,26 +450,38 @@
                 $('#cart-content').toggleClass('open');
             });
 
-            // Close cart content
-            $('#cart-close').on('click', function() {
-                $('#cart-content').removeClass('open');
-            });
-
             // Add to cart functionality
-            $('.add-to-cart').on('click', function() {
+            $('.add-to-cart').on('click', function(e) {
+                e.preventDefault(); // Evitar que el enlace haga scroll o redirección
+
+                // Obtener los datos del producto
                 let productId = $(this).data('id');
                 let productName = $(this).closest('.card-body').find('.card-title').text();
+                let productDescription = $(this).closest('.card-body').find('.card-text').text();
                 let productPrice = $(this).closest('.card-body').find('.card-text strong').text().replace('Precio: $', '');
+                let productImage = $(this).closest('.card').find('.card-img-top').attr('src');
+
+                // Incrementar contador de carrito (opcional)
                 let cartCount = $('#cart-count').text();
                 $('#cart-count').text(parseInt(cartCount) + 1);
 
+                // Construir elemento del carrito
                 let cartItem = `
                     <div class="cart-item">
+                        <img src="${productImage}" class="cart-item-image" alt="${productName}">
                         <p class="cart-item-title">${productName}</p>
+                        <p class="cart-item-description">${productDescription}</p>
                         <p class="cart-item-price">$${productPrice}</p>
                     </div>
                 `;
+                
+                // Agregar elemento al carrito
                 $('#cart-items').append(cartItem);
+            });
+
+            // Cerrar contenido del carrito
+            $('#cart-close').on('click', function() {
+                $('#cart-content').removeClass('open');
             });
         });
     </script>
