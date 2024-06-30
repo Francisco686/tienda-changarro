@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Changarro - Tienda de Abarrotes</title>
     <link rel="icon" href="../assets/img/kaiadmin/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
     <!-- Fonts and icons -->
     <script src="../assets/js/plugin/webfont/webfont.min.js"></script>
@@ -257,8 +259,101 @@
     color: #fff; /* Color al hacer hover */
     transform: scale(1.1);
 }
+.carousel-item {
+    height: 400px;
+}
 
-.nav-secondary .nav-link:
+.carousel-item img {
+    height: 100%;
+    object-fit: cover;
+}
+.carousel-item img {
+    width: 80%; /* Ajusta el tamaño al 80% del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+}
+.carousel-caption .btn {
+    margin-top: 10px;
+}
+.carousel-image {
+    max-width: 80%;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 15px; /* Bordes redondeados */
+    object-fit: cover; /* Ajustar la imagen */
+}
+
+.carousel-caption h5 {
+    font-size: 1.5rem;
+}
+
+.carousel-caption p {
+    font-size: 1rem;
+}
+.carousel-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-text {
+    font-size: 1.25rem;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+.caption-background {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo negro semitransparente */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.carousel-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.carousel-text {
+    font-size: 1.25rem;
+    color: #fff;
+}
+.caption-custom {
+    transform: translateY(50%); /* Ajusta este valor según sea necesario */
+}
+.caption-background {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo negro semitransparente */
+    padding: 10px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 20px; /* Ajusta la distancia desde abajo según sea necesario */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.carousel-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.carousel-text {
+    font-size: 1.25rem;
+    color: #fff;
+}
+
+.btn-comprar {
+    margin-top: 10px; /* Espacio entre el texto y el botón */
+}
+
+
+
+
+
+
+
+
 
     </style>
 
@@ -320,38 +415,57 @@
                         <hr class="my-4">
                         <p>Somos expertos en ofrecerte productos abarroteros de la más alta calidad.</p>
                     </div>
-                    <!-- Carrusel de productos -->
-    <div id="carouselExampleIndicators" class="carousel slide mt-5" data-ride="carousel">
-        <ol class="carousel-indicators">
-            @foreach($productos as $key => $producto)
-                <li data-target="#carouselExampleIndicators" data-slide-to="{{ $key }}" class="{{ $key == 0 ? 'active' : '' }}"></li>
-            @endforeach
-        </ol>
-        <div class="carousel-inner">
-            @foreach($productos as $key => $producto)
-                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                    <img class="d-block w-100" src="{{ asset('storage/' . str_replace('public/', '', $producto->imagen)) }}" alt="{{ $producto->nombre }}">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>{{ $producto->nombre }}</h5>
-                        <p>{{ $producto->descripcion }}</p>
-                    </div>
-                </div>
-            @endforeach
+                    <!--Carrusel-->
+<!--Carrusel-->
+<div id="productCarousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#productCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#productCarousel" data-slide-to="1"></li>
+        <li data-target="#productCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{{ asset('img/principal.png') }}" class="d-block carousel-image" alt="First slide">
+            <div class="carousel-caption d-none d-md-block caption-background caption-custom">
+                <h5 class="carousel-title">Cereales Nestlé</h5>
+                <p class="carousel-text">Compra el primero y lleva el segundo con 70% de descuento</p>
+                <a href="{{ url('/productos') }}" class="btn btn-primary btn-comprar">Comprar Ahora</a>
+            </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+        <div class="carousel-item">
+            <img src="{{ asset('img/principal2.png') }}" class="d-block carousel-image" alt="Second slide">
+            <div class="carousel-caption d-none d-md-block caption-background caption-custom">
+                <h5 class="carousel-title">Lacteos</h5>
+                <p class="carousel-text">Aprovecha y ahorra más con nuestros descuentos</p>
+                <a href="{{ url('/productos') }}" class="btn btn-primary btn-comprar">Comprar Ahora</a>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="{{ asset('img/principal3.png') }}" class="d-block carousel-image" alt="Third slide">
+            <div class="carousel-caption d-none d-md-block caption-background caption-custom">
+                <h5 class="carousel-title">Cerveza Modelo</h5>
+                <p class="carousel-text">Compruébalo en el total de tu ticket</p>
+                <a href="{{ url('/productos') }}" class="btn btn-primary btn-comprar">Comprar Ahora</a>
+            </div>
+        </div>
     </div>
+    <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
 </div>
+
+
+
+
+                   
                    
 
                    
-
                     <!-- Products -->
                     <h2>Productos</h2>
                     <div class="row">
@@ -421,6 +535,9 @@
     </div>
 
     <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="../assets/js/core/jquery.3.2.1.min.js"></script>
     <script src="../assets/js/core/popper.min.js"></script>
     <script src="../assets/js/core/bootstrap.min.js"></script>
