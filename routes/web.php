@@ -19,6 +19,7 @@ Route::get('home', [HomeController::class, 'index'])->name('home.index');
 
 Auth::routes();
 
+
 Route::resource('provedors', ProvedorController::class);
 Route::resource('empleados', EmpleadoController::class);
 Route::resource('ventas', VentaController::class);

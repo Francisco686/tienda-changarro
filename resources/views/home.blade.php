@@ -209,50 +209,57 @@
             border-radius: 3px;
         }
         /* Estilos más llamativos para los enlaces de la barra lateral */
+        .nav-secondary {
+    background-color: #007bff; /* Azul vibrante de fondo */
+}
+
 .nav-secondary .nav-link {
-    color: #ccc; /* Color de texto inicial */
+    color: #fff; /* Color de texto blanco */
     transition: color 0.3s, transform 0.3s;
     font-size: 1.1rem;
     display: flex;
     align-items: center; /* Para centrar verticalmente el texto y el icono */
 }
 
-/* Establecer colores vibrantes para cada enlace */
-.nav-secondary .nav-link[href="{{ route('home.index') }}"] {
-    color: #ff5733; /* Naranja */
+.nav-secondary {
+    background-color: #007bff; /* Azul vibrante de fondo */
+    padding: 10px; /* Opcional: espacio alrededor del menú */
 }
 
-.nav-secondary .nav-link[href="{{ route('productos.index') }}"] {
-    color: #33a1ff; /* Azul */
+.nav-secondary .nav-link {
+    color: #007bff; /* Color de texto azul para contrastar con el fondo blanco */
+    background-color: #fff; /* Fondo blanco para los enlaces */
+    transition: transform 0.3s, color 0.3s;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center; /* Para centrar verticalmente el texto y el icono */
+    margin: 5px 0; /* Espaciado entre los enlaces */
+    padding: 10px; /* Espaciado interno de los enlaces */
+    border-radius: 5px; /* Bordes redondeados para los enlaces */
+    text-decoration: none; /* Quitar subrayado de los enlaces */
 }
 
-.nav-secondary .nav-link[href="{{ route('ventas.index') }}"] {
-    color: #ffa233; /* Naranja claro */
-}
-
-.nav-secondary .nav-link[href="{{ route('provedors.index') }}"] {
-    color: #33ff57; /* Verde */
-}
-
-.nav-secondary .nav-link[href="{{ route('empleados.index') }}"] {
-    color: #b333ff; /* Morado */
-}
-
-.nav-secondary .nav-link[href="{{ route('entradas.create') }}"] {
-    color: #ff33e6; /* Rosa */
-}
-
-.nav-secondary .nav-link[href="{{ route('tickets.create') }}"] {
-    color: #ff5733; /* Naranja */
-}
-
-.nav-secondary .nav-link[href="{{ route('telefonos.create') }}"] {
-    color: #33a1ff; /* Azul */
-}
-
+/* Establecer colores para cada enlace */
+.nav-secondary .nav-link[href="{{ route('home.index') }}"],
+.nav-secondary .nav-link[href="{{ route('productos.index') }}"],
+.nav-secondary .nav-link[href="{{ route('ventas.index') }}"],
+.nav-secondary .nav-link[href="{{ route('provedors.index') }}"],
+.nav-secondary .nav-link[href="{{ route('empleados.index') }}"],
+.nav-secondary .nav-link[href="{{ route('entradas.create') }}"],
+.nav-secondary .nav-link[href="{{ route('tickets.create') }}"],
+.nav-secondary .nav-link[href="{{ route('telefonos.create') }}"],
 .nav-secondary .nav-link[href="{{ route('venta_mayoreo.create') }}"] {
-    color: #ffa233; /* Naranja claro */
+    color: #007bff; /* Color de texto azul */
 }
+
+/* Efecto de hover para mantener el fondo blanco */
+.nav-secondary .nav-link:hover {
+    color: #0056b3; /* Color de texto ligeramente más oscuro en hover */
+    transform: scale(1.05); /* Pequeño aumento de escala */
+}
+
+
+
 
 /* Efecto hover para los enlaces */
 .nav-secondary .nav-link:hover {
@@ -346,6 +353,62 @@
 .btn-comprar {
     margin-top: 10px; /* Espacio entre el texto y el botón */
 }
+.contact-form-container {
+    width: 100%;
+    max-width: 995px; /* Ajuste el máximo ancho según sea necesario */
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form {
+    width: 100%;
+}
+
+.contact-form h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.contact-form .form-group {
+    margin-bottom: 15px;
+}
+
+.contact-form label {
+    font-weight: bold;
+    color: #555;
+}
+
+.contact-form .form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.contact-form textarea.form-control {
+    resize: vertical;
+}
+
+.contact-form button[type="submit"] {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.contact-form button[type="submit"]:hover {
+    background-color: #0056b3;
+}
 
 
 
@@ -365,7 +428,7 @@
         <div class="sidebar">
             <div class="sidebar-logo">
                 <a href="../index.html" class="logo">
-                    <img src="../assets/img/changarro.jpg" alt="El Changarro Logo" height="50">
+<img src="../assets/img/changarro.jpg" alt="El Changarro Logo" style="border: 2px solid #ccc; border-radius: 5px; padding: 5px; height: 80px;">
                 </a>
             </div>
             <div class="sidebar-wrapper scrollbar scrollbar-inner">
@@ -380,6 +443,7 @@
         <li class="nav-item"><a class="nav-link" href="{{ route('tickets.create') }}"><i class="fas fa-ticket-alt"></i> Tickets</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('telefonos.create') }}"><i class="fas fa-phone"></i> Teléfonos</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('venta_mayoreo.create') }}"><i class="fas fa-tags"></i> Ventas al por Mayor</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('personas.index') }}"><i class="fas fa-users"></i> Personas</a></li>
     </ul>
                 </div>
             </div>
@@ -511,28 +575,27 @@
                         </div>
                     </div>
 
-                    <!-- Contact Form -->
-                    <h2>Contacto</h2>
-                    <form action="{{ url('/contact') }}" method="post">
-                        @csrf
-                        <div class="form-group">
-                            <label for="name">Nombre:</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Correo Electrónico:</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Mensaje:</label>
-                            <textarea class="form-control" id="message" name="message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Enviar</button>
-                    </form>
-                </div>
-            </main>
+                  <!-- Contact Form -->
+<div class="contact-form-container">
+    <h2>Contacto</h2>
+    <form action="{{ url('/contact') }}" method="post" class="contact-form">
+        @csrf
+        <div class="form-group">
+            <label for="name">Nombre:</label>
+            <input type="text" class="form-control" id="name" name="name" required>
         </div>
-    </div>
+        <div class="form-group">
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="message">Mensaje:</label>
+            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+</div>
+
 
     <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
@@ -567,34 +630,57 @@
                 $('#cart-content').toggleClass('open');
             });
 
-            // Add to cart functionality
-            $('.add-to-cart').on('click', function(e) {
-                e.preventDefault(); // Evitar que el enlace haga scroll o redirección
+// Add to cart functionality
+$('.add-to-cart').on('click', function(e) {
+    e.preventDefault(); // Evitar que el enlace haga scroll o redirección
 
-                // Obtener los datos del producto
-                let productId = $(this).data('id');
-                let productName = $(this).closest('.card-body').find('.card-title').text();
-                let productDescription = $(this).closest('.card-body').find('.card-text').text();
-                let productPrice = $(this).closest('.card-body').find('.card-text strong').text().replace('Precio: $', '');
-                let productImage = $(this).closest('.card').find('.card-img-top').attr('src');
+    // Obtener los datos del producto
+    let productId = $(this).data('id');
+    let productName = $(this).closest('.card-body').find('.card-title').text();
+    let productDescription = $(this).closest('.card-body').find('.card-text').not('.card-price').text();
+    let productPrice = $(this).closest('.card-body').find('.card-price').text().replace('Precio: $', '').trim();
+    let productImage = $(this).closest('.card').find('.card-img-top').attr('src');
 
-                // Incrementar contador de carrito (opcional)
-                let cartCount = $('#cart-count').text();
-                $('#cart-count').text(parseInt(cartCount) + 1);
+    // Incrementar contador de carrito (opcional)
+    let cartCount = $('#cart-count').text();
+    $('#cart-count').text(parseInt(cartCount) + 1);
 
-                // Construir elemento del carrito
-                let cartItem = `
-                    <div class="cart-item">
-                        <img src="${productImage}" class="cart-item-image" alt="${productName}">
-                        <p class="cart-item-title">${productName}</p>
-                        <p class="cart-item-description">${productDescription}</p>
-                        <p class="cart-item-price">$${productPrice}</p>
-                    </div>
-                `;
-                
-                // Agregar elemento al carrito
-                $('#cart-items').append(cartItem);
-            });
+    // Construir elemento del carrito
+    let cartItem = `
+        <div class="cart-item" data-id="${productId}">
+            <img src="${productImage}" class="cart-item-image" alt="${productName}">
+            <p class="cart-item-title">${productName}</p>
+          <div class="cart-item">
+    <p class="cart-item-description"></p>
+    <p class="cart-item-details">Precio:</p>
+</div>
+
+            <div class="cart-item-quantity">
+                <button class="decrement-quantity">-</button>
+                <input type="number" value="1" min="1" class="quantity-input">
+                <button class="increment-quantity">+</button>
+            </div>
+        </div>
+    `;
+
+    // Agregar elemento al carrito
+    $('#cart-items').append(cartItem);
+});
+
+// Actualizar la cantidad del producto
+$('#cart-items').on('click', '.increment-quantity', function() {
+    let $input = $(this).siblings('.quantity-input');
+    $input.val(parseInt($input.val()) + 1);
+});
+
+$('#cart-items').on('click', '.decrement-quantity', function() {
+    let $input = $(this).siblings('.quantity-input');
+    if (parseInt($input.val()) > 1) {
+        $input.val(parseInt($input.val()) - 1);
+    }
+});
+
+
 
             // Cerrar contenido del carrito
             $('#cart-close').on('click', function() {
