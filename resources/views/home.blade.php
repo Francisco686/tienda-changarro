@@ -388,6 +388,8 @@
         <li class="nav-item"><a class="nav-link" href="{{ route('telefonos.create') }}"><i class="fas fa-phone"></i> Teléfonos</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('venta_mayoreo.create') }}"><i class="fas fa-tags"></i> Ventas al por Mayor</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('personas.index') }}"><i class="fas fa-users"></i> Personas</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('fechas.index') }}"><i class="far fa-calendar-alt"></i> Fechas</a></li>
+
     </ul>
                 </div>
             </div>
