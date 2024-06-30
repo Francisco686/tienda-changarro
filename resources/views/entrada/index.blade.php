@@ -44,10 +44,10 @@
                                 <tbody>
                                     @foreach ($entradas as $entrada)
                                         <tr>
-                                        <td>{{ ++$i }}</td>
+                                            <td>{{ ++$i }}</td>
                                             <td>{{ $entrada->cantidad_entradas }}</td>
-                                            <td>{{ $entrada->id_producto }}</td>
-                                            <td>{{ $entrada->id_proveedor }}</td>
+                                            <td>{{ $entrada->producto->nombre }}</td> <!-- Accede al nombre del producto a través de la relación -->
+                                            <td>{{ $entrada->proveedor->nombre }}</td> <!-- Accede al nombre del proveedor a través de la relación -->
                                             <td>{{ $entrada->precio_unitario }}</td>
                                             <td>{{ $entrada->total }}</td>
                                             <td>
@@ -71,8 +71,6 @@
         </div>
     </div>
 @endsection
-
-
 
 
 

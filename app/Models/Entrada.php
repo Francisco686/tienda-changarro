@@ -48,6 +48,6 @@ class Entrada extends Model
      */
     public function proveedor()
     {
-        return $this->belongsTo(Proveedor::class, 'id_proveedor');
+        return $this->belongsTo(Provedor::class, 'id_proveedor');
     }
 }

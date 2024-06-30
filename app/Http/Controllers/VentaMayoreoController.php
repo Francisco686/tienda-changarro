@@ -5,90 +5,93 @@ namespace App\Http\Controllers;
 use App\Models\VentaMayoreo;
 use App\Models\Producto;
 use App\Models\Provedor;
+use App\Models\Fecha;
 use Illuminate\Http\Request;
 
 class VentaMayoreoController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $ventaMayoreos = VentaMayoreo::with('producto', 'provedor')->paginate();
-
-        return view('venta_mayoreo.index', compact('ventaMayoreos'))
-            ->with('i', (request()->input('page', 1) - 1) * $ventaMayoreos->perPage());
+        $ventas = VentaMayoreo::with(['producto', 'proveedor', 'fecha'])->get();
+        return view('venta_mayoreo.index', compact('ventas'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
         $productos = Producto::all();
         $proveedores = Provedor::all();
-
-        return view('venta_mayoreo.create', compact('productos', 'proveedores'));
+        $fechas = Fecha::all();
+        return view('venta_mayoreo.create', compact('productos', 'proveedores', 'fechas'));
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         $request->validate([
-            'id_producto' => 'required|integer',
-            'id_provedor' => 'required|integer',
-            'precio_unitario' => 'required|numeric',
-            'cantidad' => 'required|integer',
+            'id_producto' => 'required|exists:productos,id',
+            'id_proveedor' => 'required|exists:proveedores,id',
+            'id_fecha' => 'required|exists:fechas,id_fecha',
         ]);
 
-        $ventaMayoreo = new VentaMayoreo();
-        $ventaMayoreo->id_producto = $request->id_producto;
-        $ventaMayoreo->id_provedor = $request->id_provedor;
-        $ventaMayoreo->precio_unitario = $request->precio_unitario;
-        $ventaMayoreo->cantidad = $request->cantidad;
-        $ventaMayoreo->total = $request->precio_unitario * $request->cantidad;
-        $ventaMayoreo->save();
+        VentaMayoreo::create($request->all());
 
-        return redirect()->route('venta_mayoreo.index')
-            ->with('success', 'Venta al mayoreo creada exitosamente.');
+        return redirect()->route('venta_mayoreo.index')->with('success', 'Venta al mayoreo creada con éxito.');
     }
 
+    /**
+     * Display the specified resource.
+     */
     public function show($id)
     {
-        $ventaMayoreo = VentaMayoreo::with('producto', 'provedor')->findOrFail($id);
-
-        return view('venta_mayoreo.show', compact('ventaMayoreo'));
+        $venta = VentaMayoreo::with(['producto', 'proveedor', 'fecha'])->findOrFail($id);
+        return view('venta_mayoreo.show', compact('venta'));
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     */
     public function edit($id)
     {
-        $ventaMayoreo = VentaMayoreo::findOrFail($id);
+        $venta = VentaMayoreo::findOrFail($id);
         $productos = Producto::all();
         $proveedores = Provedor::all();
-
-        return view('venta_mayoreo.edit', compact('ventaMayoreo', 'productos', 'proveedores'));
+        $fechas = Fecha::all();
+        return view('venta_mayoreo.edit', compact('venta', 'productos', 'proveedores', 'fechas'));
     }
 
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(Request $request, $id)
     {
         $request->validate([
-            'id_producto' => 'required|integer',
-            'id_provedor' => 'required|integer',
-            'precio_unitario' => 'required|numeric',
-            'cantidad' => 'required|integer',
+            'id_producto' => 'required|exists:productos,id',
+            'id_proveedor' => 'required|exists:proveedores,id',
+            'id_fecha' => 'required|exists:fechas,id_fecha',
         ]);
 
-        $ventaMayoreo = VentaMayoreo::findOrFail($id);
-        $ventaMayoreo->id_producto = $request->id_producto;
-        $ventaMayoreo->id_provedor = $request->id_provedor;
-        $ventaMayoreo->precio_unitario = $request->precio_unitario;
-        $ventaMayoreo->cantidad = $request->cantidad;
-        $ventaMayoreo->total = $request->precio_unitario * $request->cantidad;
-        $ventaMayoreo->save();
+        $venta = VentaMayoreo::findOrFail($id);
+        $venta->update($request->all());
 
-        return redirect()->route('venta_mayoreo.index')
-            ->with('success', 'Venta al mayoreo actualizada exitosamente.');
+        return redirect()->route('venta_mayoreo.index')->with('success', 'Venta al mayoreo actualizada con éxito.');
     }
 
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy($id)
     {
-        $ventaMayoreo = VentaMayoreo::findOrFail($id);
-        $ventaMayoreo->delete();
+        $venta = VentaMayoreo::findOrFail($id);
+        $venta->delete();
 
-        return redirect()->route('venta_mayoreo.index')
-            ->with('success', 'Venta al mayoreo eliminada exitosamente.');
+        return redirect()->route('venta_mayoreo.index')->with('success', 'Venta al mayoreo eliminada con éxito.');
     }
 }
