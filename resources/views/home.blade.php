@@ -209,50 +209,57 @@
             border-radius: 3px;
         }
         /* Estilos más llamativos para los enlaces de la barra lateral */
+        .nav-secondary {
+    background-color: #007bff; /* Azul vibrante de fondo */
+}
+
 .nav-secondary .nav-link {
-    color: #ccc; /* Color de texto inicial */
+    color: #fff; /* Color de texto blanco */
     transition: color 0.3s, transform 0.3s;
     font-size: 1.1rem;
     display: flex;
     align-items: center; /* Para centrar verticalmente el texto y el icono */
 }
 
-/* Establecer colores vibrantes para cada enlace */
-.nav-secondary .nav-link[href="{{ route('home.index') }}"] {
-    color: #ff5733; /* Naranja */
+.nav-secondary {
+    background-color: #007bff; /* Azul vibrante de fondo */
+    padding: 10px; /* Opcional: espacio alrededor del menú */
 }
 
-.nav-secondary .nav-link[href="{{ route('productos.index') }}"] {
-    color: #33a1ff; /* Azul */
+.nav-secondary .nav-link {
+    color: #007bff; /* Color de texto azul para contrastar con el fondo blanco */
+    background-color: #fff; /* Fondo blanco para los enlaces */
+    transition: transform 0.3s, color 0.3s;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center; /* Para centrar verticalmente el texto y el icono */
+    margin: 5px 0; /* Espaciado entre los enlaces */
+    padding: 10px; /* Espaciado interno de los enlaces */
+    border-radius: 5px; /* Bordes redondeados para los enlaces */
+    text-decoration: none; /* Quitar subrayado de los enlaces */
 }
 
-.nav-secondary .nav-link[href="{{ route('ventas.index') }}"] {
-    color: #ffa233; /* Naranja claro */
-}
-
-.nav-secondary .nav-link[href="{{ route('provedors.index') }}"] {
-    color: #33ff57; /* Verde */
-}
-
-.nav-secondary .nav-link[href="{{ route('empleados.index') }}"] {
-    color: #b333ff; /* Morado */
-}
-
-.nav-secondary .nav-link[href="{{ route('entradas.create') }}"] {
-    color: #ff33e6; /* Rosa */
-}
-
-.nav-secondary .nav-link[href="{{ route('tickets.create') }}"] {
-    color: #ff5733; /* Naranja */
-}
-
-.nav-secondary .nav-link[href="{{ route('telefonos.create') }}"] {
-    color: #33a1ff; /* Azul */
-}
-
+/* Establecer colores para cada enlace */
+.nav-secondary .nav-link[href="{{ route('home.index') }}"],
+.nav-secondary .nav-link[href="{{ route('productos.index') }}"],
+.nav-secondary .nav-link[href="{{ route('ventas.index') }}"],
+.nav-secondary .nav-link[href="{{ route('provedors.index') }}"],
+.nav-secondary .nav-link[href="{{ route('empleados.index') }}"],
+.nav-secondary .nav-link[href="{{ route('entradas.create') }}"],
+.nav-secondary .nav-link[href="{{ route('tickets.create') }}"],
+.nav-secondary .nav-link[href="{{ route('telefonos.create') }}"],
 .nav-secondary .nav-link[href="{{ route('venta_mayoreo.create') }}"] {
-    color: #ffa233; /* Naranja claro */
+    color: #007bff; /* Color de texto azul */
 }
+
+/* Efecto de hover para mantener el fondo blanco */
+.nav-secondary .nav-link:hover {
+    color: #0056b3; /* Color de texto ligeramente más oscuro en hover */
+    transform: scale(1.05); /* Pequeño aumento de escala */
+}
+
+
+
 
 /* Efecto hover para los enlaces */
 .nav-secondary .nav-link:hover {
@@ -380,6 +387,7 @@
         <li class="nav-item"><a class="nav-link" href="{{ route('tickets.create') }}"><i class="fas fa-ticket-alt"></i> Tickets</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('telefonos.create') }}"><i class="fas fa-phone"></i> Teléfonos</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('venta_mayoreo.create') }}"><i class="fas fa-tags"></i> Ventas al por Mayor</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ route('personas.index') }}"><i class="fas fa-users"></i> Personas</a></li>
     </ul>
                 </div>
             </div>
@@ -567,34 +575,57 @@
                 $('#cart-content').toggleClass('open');
             });
 
-            // Add to cart functionality
-            $('.add-to-cart').on('click', function(e) {
-                e.preventDefault(); // Evitar que el enlace haga scroll o redirección
+// Add to cart functionality
+$('.add-to-cart').on('click', function(e) {
+    e.preventDefault(); // Evitar que el enlace haga scroll o redirección
 
-                // Obtener los datos del producto
-                let productId = $(this).data('id');
-                let productName = $(this).closest('.card-body').find('.card-title').text();
-                let productDescription = $(this).closest('.card-body').find('.card-text').text();
-                let productPrice = $(this).closest('.card-body').find('.card-text strong').text().replace('Precio: $', '');
-                let productImage = $(this).closest('.card').find('.card-img-top').attr('src');
+    // Obtener los datos del producto
+    let productId = $(this).data('id');
+    let productName = $(this).closest('.card-body').find('.card-title').text();
+    let productDescription = $(this).closest('.card-body').find('.card-text').not('.card-price').text();
+    let productPrice = $(this).closest('.card-body').find('.card-price').text().replace('Precio: $', '').trim();
+    let productImage = $(this).closest('.card').find('.card-img-top').attr('src');
 
-                // Incrementar contador de carrito (opcional)
-                let cartCount = $('#cart-count').text();
-                $('#cart-count').text(parseInt(cartCount) + 1);
+    // Incrementar contador de carrito (opcional)
+    let cartCount = $('#cart-count').text();
+    $('#cart-count').text(parseInt(cartCount) + 1);
 
-                // Construir elemento del carrito
-                let cartItem = `
-                    <div class="cart-item">
-                        <img src="${productImage}" class="cart-item-image" alt="${productName}">
-                        <p class="cart-item-title">${productName}</p>
-                        <p class="cart-item-description">${productDescription}</p>
-                        <p class="cart-item-price">$${productPrice}</p>
-                    </div>
-                `;
-                
-                // Agregar elemento al carrito
-                $('#cart-items').append(cartItem);
-            });
+    // Construir elemento del carrito
+    let cartItem = `
+        <div class="cart-item" data-id="${productId}">
+            <img src="${productImage}" class="cart-item-image" alt="${productName}">
+            <p class="cart-item-title">${productName}</p>
+          <div class="cart-item">
+    <p class="cart-item-description">Chocolate</p>
+    <p class="cart-item-details">Precio: $18</p>
+</div>
+
+            <div class="cart-item-quantity">
+                <button class="decrement-quantity">-</button>
+                <input type="number" value="1" min="1" class="quantity-input">
+                <button class="increment-quantity">+</button>
+            </div>
+        </div>
+    `;
+
+    // Agregar elemento al carrito
+    $('#cart-items').append(cartItem);
+});
+
+// Actualizar la cantidad del producto
+$('#cart-items').on('click', '.increment-quantity', function() {
+    let $input = $(this).siblings('.quantity-input');
+    $input.val(parseInt($input.val()) + 1);
+});
+
+$('#cart-items').on('click', '.decrement-quantity', function() {
+    let $input = $(this).siblings('.quantity-input');
+    if (parseInt($input.val()) > 1) {
+        $input.val(parseInt($input.val()) - 1);
+    }
+});
+
+
 
             // Cerrar contenido del carrito
             $('#cart-close').on('click', function() {

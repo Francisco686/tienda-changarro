@@ -18,12 +18,11 @@ class VentaController extends Controller
      */
     public function index(Request $request): View
     {
-        $ventas = Venta::join("productos","ventas.producto_id","productos.id")
-            ->select("ventas.cantidad","ventas.total","ventas.id","productos.nombre","productos.precio")
+        $ventas = Venta::join("productos", "ventas.producto_id", "productos.id")
+            ->select("ventas.cantidad", "ventas.total", "ventas.id", "productos.nombre", "productos.precio")
             ->get();
 
         return view('venta.index', compact('ventas'));
-           // ->with('i', ($request->input('page', 1) - 1) * $ventas->perPage());
     }
 
     /**
@@ -31,9 +30,9 @@ class VentaController extends Controller
      */
     public function create(): View
     {
-        $productos=Producto::all();
+        $productos = Producto::all();
         $venta = new Venta();
-        return view('venta.create', compact('venta','productos'));
+        return view('venta.create', compact('venta', 'productos'));
     }
 
     /**
@@ -42,16 +41,16 @@ class VentaController extends Controller
     public function store(VentaRequest $request): RedirectResponse
     {
         $request->validated();
-        $total=0;
-        $producto=Producto::find($request->producto_id);
-       
-        $total=$request->cantidad * $producto->precio;
-        $venta=[
-            "producto_id"=>$request->producto_id,
-            "cantidad"=>$request->cantidad,
-            "total"=>$total
+        $total = 0;
+        $producto = Producto::find($request->producto_id);
+        $total = $request->cantidad * $producto->precio;
+
+        $venta = [
+            "producto_id" => $request->producto_id,
+            "cantidad" => $request->cantidad,
+            "total" => $total
         ];
-      
+
         Venta::create($venta);
 
         return Redirect::route('ventas.index')
@@ -74,8 +73,9 @@ class VentaController extends Controller
     public function edit($id): View
     {
         $venta = Venta::find($id);
+        $productos = Producto::all(); // Obtener todos los productos disponibles
 
-        return view('venta.edit', compact('venta'));
+        return view('venta.edit', compact('venta', 'productos'));
     }
 
     /**
@@ -89,6 +89,9 @@ class VentaController extends Controller
             ->with('success', 'Venta updated successfully');
     }
 
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy($id): RedirectResponse
     {
         Venta::find($id)->delete();

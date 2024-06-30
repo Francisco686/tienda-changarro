@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Persona;
+use App\Models\Personas;
 use Illuminate\Http\Request;
 
 class PersonaController extends Controller
@@ -12,7 +12,7 @@ class PersonaController extends Controller
      */
     public function index()
     {
-        $personas = Persona::all();
+        $personas = Personas::all();
         return view('personas.index', compact('personas'));
     }
 
@@ -34,7 +34,7 @@ class PersonaController extends Controller
             'apellido_paterno' => 'required',
         ]);
 
-        Persona::create($request->all());
+        Personas::create($request->all());
 
         return redirect()->route('personas.index')
             ->with('success', 'Persona creada correctamente.');
@@ -43,7 +43,7 @@ class PersonaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Persona $persona)
+    public function show(Personas $persona)
     {
         return view('personas.show', compact('persona'));
     }
@@ -51,7 +51,7 @@ class PersonaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Persona $persona)
+    public function edit(Personas $persona)
     {
         return view('personas.edit', compact('persona'));
     }
@@ -59,7 +59,7 @@ class PersonaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Persona $persona)
+    public function update(Request $request, Personas $persona)
     {
         $request->validate([
             'nombre' => 'required',
@@ -75,7 +75,7 @@ class PersonaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Persona $persona)
+    public function destroy(Personas $persona)
     {
         $persona->delete();
 
