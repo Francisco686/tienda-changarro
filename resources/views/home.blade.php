@@ -440,7 +440,7 @@
         <li class="nav-item"><a class="nav-link" href="{{ route('provedors.index') }}"><i class="fas fa-truck"></i> Proveedores</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('empleados.index') }}"><i class="fas fa-users"></i> Empleados</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('entradas.create') }}"><i class="fas fa-sign-in-alt"></i> Entradas</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ route('tickets.create') }}"><i class="fas fa-ticket-alt"></i> Tickets</a></li>
+       
         <li class="nav-item"><a class="nav-link" href="{{ route('telefonos.create') }}"><i class="fas fa-phone"></i> Teléfonos</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('venta_mayoreo.create') }}"><i class="fas fa-tags"></i> Ventas al por Mayor</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ route('personas.index') }}"><i class="fas fa-users"></i> Personas</a></li>
